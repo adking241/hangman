@@ -9,11 +9,18 @@ class TestHangman < Minitest::Test
 
 	def test_assert_that_empty_string_returns_true
 		secret_word = ""
+		assert_equal(true, get_word?(secret_word)) 
+	end #first value is what we expect, 2nd value is function w/ variable
+
+	def test_assert_string_returns_true
+		secret_word = "cat"
 		assert_equal(true, get_word?(secret_word))
+	end	
+
+	def test_assert_string_returns_false
+		secret_word = 
+		assert_equal(false, get_word?(secret_word))
 	end
-
-
-
 
 
 end
