@@ -32,5 +32,27 @@ class TestHangman < Minitest::Test
 		assert_equal(3, get_secret_word_length(secret_word))
 	end
 
+	def test_assert_that_string_contains_a_letter
+		secret_word = "fox"
+		guess = "o"
+		assert_equal(true, in_word?(secret_word, guess))
+	end
 
+	def test_assert_that_string_does_not_contain_a_letter
+		secret_word = "fox"
+		guess = "w"
+		assert_equal(false, in_word?(secret_word, guess))
+	end
+
+	def test_assert_o_is_put_in_the_right_array
+		secret_word = "fox"
+		guess = "o"
+		assert_equal(true, in_word?(secret_word, guess))
+	end
+
+	def test_assert_x_is_put_in_the_wrong_array
+	secret_word = "fox"
+	guess = "w"
+	assert_equal(false, in_word?(secret_word, guess))
+	end
 end
