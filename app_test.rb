@@ -17,10 +17,15 @@ class TestHangman < Minitest::Test
 		assert_equal(true, get_word?(secret_word))
 	end	
 
-	def test_assert_string_returns_false
-		secret_word = 
+	def test_assert_integer_returns_false
+		secret_word = 17
 		assert_equal(false, get_word?(secret_word))
 	end
 
+	def test_assert_array_returns_false
+		secret_word = []
+		assert_equal(false, get_word?(secret_word))
+	end
 
+	
 end
