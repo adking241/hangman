@@ -27,5 +27,10 @@ class TestHangman < Minitest::Test
 		assert_equal(false, get_word?(secret_word))
 	end
 
-	
+	def test_assert_thats_length_for_fox_is_3
+		secret_word = "fox"
+		assert_equal(3, get_secret_word_length(secret_word))
+	end
+
+
 end
