@@ -7,8 +7,9 @@ class TestHangman < Minitest::Test
 		assert_equal(1, 1)
 	end
 
-	def test_assert_that_secret_word_equals_string
-		assert_equal(String, secret_word.class)
+	def test_assert_that_empty_string_returns_true
+		secret_word = ""
+		assert_equal(true, get_word?(secret_word))
 	end
 
 
