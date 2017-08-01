@@ -67,4 +67,14 @@ class TestHangman < Minitest::Test
         assert_equal(["_", "_", "_", "_", "_", "_"], set_display_word(secret_word))
     end
 
+    def test_assert_that_array_has_all_guessed_letters
+        letter = "r"
+        assert_equal(["r"], all_guessed_letters(letter))
+    end    
+
+    def test_assert_that_secret_word_is_fox_display_word_becomes_array_with_string_with_f_dash_dash
+        letter = "f"
+        secret_word = "fox"
+        assert_equal(["f", "_", "_"], update_display_word(secret_word, letter))
+    end 
 end
