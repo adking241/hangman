@@ -50,4 +50,15 @@ class TestHangman < Minitest::Test
         assert_equal(["f"], play_hangman(secret_word, letter))
     end
     
+    def test_assert_z_for_fox_playing_hangman
+        secret_word = "fox"
+        letter = "z"
+        assert_equal(["z"], play_hangman(secret_word, letter))
+        #we are using the function (instead of the array) to return the value in the array. This works because if it was putting the "z" into the wrong array, the result would be ["fz"]
+    end
+
+    def test_assert_thats_display_word_length_equals_secret_word
+        secret_word = "fox"
+        assert_equal(["_", "_", "_"], set_display_word(secret_word))
+    end
 end
