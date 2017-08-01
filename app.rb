@@ -21,14 +21,14 @@ end
 def push_correct_guess_into(letter) #this function pushes a correct guess, letter, into an array
     correct_letter = [] 
     correct_letter.push letter
-    puts "#{correct_letter} is correct_letter"
+    # puts "#{correct_letter} is correct_letter"
     correct_letter #this calls the array so it is the last step in the function
 end
 
 def push_incorrect_guess_into(letter) #see above
     wrong_letter = []
     wrong_letter.push letter
-    puts "#{wrong_letter} is wrong_letter"
+    # puts "#{wrong_letter} is wrong_letter" 
     wrong_letter #this calls the array so it is the last step in the function
 end
 
@@ -65,4 +65,14 @@ def update_display_word(secret_word, letter)
     counter = counter + 1
     end
     display_word    
+end
+
+def check_winner(display_word, secret_word)
+    if display_word == secret_word
+        true
+    end
+end
+
+def you_lost()
+    "Uh Oh!"
 end
