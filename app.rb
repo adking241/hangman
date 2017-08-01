@@ -41,3 +41,10 @@ def play_hangman(secret_word, letter) #bringing all the functions from above int
     end
 end
 
+def set_display_word(secret_word) #this function displays the secret word with blanks 
+    display_word = [] #sets the variable equal to an empty array
+    get_secret_word_length(secret_word).times do #run this function as many times as there are letters in my secret word 
+        display_word << "_" #it pushes blank spaces into the array equal to the number of letters in the word
+    end    
+    display_word #causes the array to be shown for the tests
+end

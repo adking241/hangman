@@ -61,4 +61,10 @@ class TestHangman < Minitest::Test
         secret_word = "fox"
         assert_equal(["_", "_", "_"], set_display_word(secret_word))
     end
+
+    def test_assert_thats_display_word_length_equals_secret_word_with_wombat
+        secret_word = "wombat"
+        assert_equal(["_", "_", "_", "_", "_", "_"], set_display_word(secret_word))
+    end
+
 end
