@@ -13,23 +13,25 @@ end
 def check_letter?(secret_word, letter)
     if $secret_word.include? $letter
         true
-    else 
+    elsif 
         false
+    elsif $guessed_letters.count >= 1 and $guessed_letters.include?($letter)
+        puts "you've already guessed that letter"
     end
 end
 
 def push_correct_guess_into(letter) #this function pushes a correct guess, letter, into an array
-    correct_letter = [] 
-    correct_letter.push $letter
+    $correct_letter = [] 
+    $correct_letter.push $letter
     # puts "#{correct_letter} is correct_letter"
-    correct_letter #this calls the array so it is the last step in the function
+    $correct_letter #this calls the array so it is the last step in the function
 end
 
 def push_incorrect_guess_into(letter) #see above
-    wrong_letter = []
-    wrong_letter.push $letter
+    $wrong_letter = []
+    $wrong_letter.push $letter
     # puts "#{wrong_letter} is wrong_letter" 
-    wrong_letter #this calls the array so it is the last step in the function
+    $wrong_letter #this calls the array so it is the last step in the function
 end
 
 def play_hangman(secret_word, letter) #bringing all the functions from above into this line. Going to have a do loop and a counter. Function in progress.
@@ -38,7 +40,7 @@ def play_hangman(secret_word, letter) #bringing all the functions from above int
         push_correct_guess_into($letter)
     else 
         push_incorrect_guess_into($letter)
-        $turn_counter = $turn_counter - 1
+        $turn_remaining = $turn_remaining - 1
     end
 end
 
@@ -51,8 +53,8 @@ def set_display_word(secret_word) #this function displays the secret word with b
 end
 
 def all_guessed_letters(letter)
-    guessed_letters = [] #we need new array for the combining of previous 2 letter guess arrays (correct & incorrect)
-    guessed_letters = push_incorrect_guess_into($letter)|push_correct_guess_into($letter)  #bar means "set union" which combines the 2 arrays and removes duplicates (although not needed here)
+    $guessed_letters = [] #we need new array for the combining of previous 2 letter guess arrays (correct & incorrect)
+    $guessed_letters = $correct_letter|$wrong_letter #bar means "set union" which combines the 2 arrays and removes duplicates (although not needed here)
 end
 
 def update_display_word(secret_word, letter)
@@ -69,30 +71,20 @@ def update_display_word(secret_word, letter)
 end
 
 def check_winner(display_word, secret_word)
-    if $display_word == $secret_word
+    if $display_word == $secret_word.split("")
         true
     end
 end
 
 def you_lost()
-    "Uh Oh!"
+    if $turn_remaining > 0
+        puts "You have #{$turn_remaining} turns remaining."
+    else
+        puts "YOU LOST SUCKER!"
+    end
 end
 
-# guesses_counter = 10
-def determine_loser(guesses_counter)
-#     if play_hangman == false
-#     guesses_counter = guesses_counter - 1
-#     end
-    # if guesses_counter == 0
-       
-    incorrect_array = push_incorrect_guess_into($letter) 
-    counter = 0
-    incorrect_array.each do
-        if index == $letter
-            $display_word[counter] = $letter
-        end 
-    counter = counter + 1
-    end
+def determine_loser(display_word, secret_word)
     $display_word  
      you_lost  
 end
@@ -104,28 +96,33 @@ end
 
 def get_letter_guess()
     $letter = gets.chomp
+    all_guessed_letters($letter)
 end
 
-def end_game?(display_word, secret_word)
-    if check_winner == true
-        check_winner
-    elsif determine_loser == true
-        determine_loser
-    end
-end    
+# def end_game?(display_word, secret_word)
+#     if check_winner($display_word, $secret_word) == true
+#         check_winner
+#     elsif determine_loser($display_word, $secret_word) == true
+#         determine_loser
+#     end
+# end    
 
 def play_game()
-    $turn_counter = 10 
+    $turn_remaining = 10 
     get_input()
     set_display_word($secret_word)
     puts "Player 2 your word is #{set_display_word($secret_word)}"
-    until $turn_counter == 0
-    p "Player 2, guess a letter."
-    get_letter_guess()
-    play_hangman($secret_word, $letter) #evaluating letter guess
-    update_display_word($secret_word, $letter)
-    puts "#{update_display_word($secret_word, $letter)}"
-    end_game?($display_word, $secret_word)
+    until $turn_remaining == 0
+        p "Player 2, guess a letter."
+        get_letter_guess()
+        play_hangman($secret_word, $letter) #evaluating letter guess
+        update_display_word($secret_word, $letter)
+        puts "#{update_display_word($secret_word, $letter)}"
+        if check_winner($display_word, $secret_word) == true
+            puts "Winner winner chicken dinner!"
+            $turn_remaining = 0
+        else determine_loser($display_word, $secret_word)
+        end
     end
 end
 
